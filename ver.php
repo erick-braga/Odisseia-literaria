@@ -178,7 +178,7 @@
             <td>{$livros['AUTOR']}</td>
             <td>{$livros['IDIOMA']}</td>
             <td>{$livros['GENERO']}</td>
-            <td>{$livros['IMAGEM']}</td>
+            <td><img src='images/{$livros['IMAGEM']}' alt='Capa' width='100'></td>
             <td>{$livros['FORMATOS']}</td>
             <td>{$livros['VALOR DA COMPRAR']}</td>
             <td>{$livros['ANO DA PUBLICAÇÂO']}</td>
