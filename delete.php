@@ -100,3 +100,4 @@ if (isset($_GET['id'])) {
 } else {
     echo "id não informado";
 }
+?>
