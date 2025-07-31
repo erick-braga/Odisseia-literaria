@@ -4,7 +4,6 @@ include("conecxao.php");
 $titulo = $_POST['TITULO'];
 $editora = $_POST['EDITORA'];
 $autor = $_POST['AUTOR'];
-$imagem = $_POST['IMAGEM'];
 $idioma = $_POST['IDIOMA'];
 $GENERO = $_POST['GENERO'];
 $formato = $_POST['FORMATO'];
@@ -12,15 +11,29 @@ $valor_compra = $_POST['VALOR_COMPRA'];
 $ano_publicacao = $_POST['ANO_PUBLICACAO'];
 $estado = $_POST['ESTADO'];
 
-$sql = "INSERT INTO LIVRARIA(TITULO, EDITORA, AUTOR, IMAGEM, FORMATO, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO)
-        VALUES ('$titulo', '$editora', '$autor', '$imagem', '$formato', $valor_compra, $ano_publicacao, '$estado');";
 
-if ($conexao->query($sql) === TRUE) {
-    echo "<p>Livro cadastrado com sucesso!</p>";
-    echo "<a href='cadastro.html'>Cadastrar novo livro</a>";
+// Diretório de destino das imagens
+$diretorio = "images/";
+
+// Verifica se a imagem foi enviada corretamente
+if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
+    $nomeTemporario = $_FILES['IMAGEM']['tmp_name'];
+    $nomeFinal = basename($_FILES['IMAGEM']['name']);
+    $caminhoFinal = $diretorio . $nomeFinal;
+        
+    if (move_uploaded_file($nomeTemporario, $caminhoFinal)) { 
+        $sql = "INSERT INTO LIVRARIA(TITULO, EDITORA, AUTOR, IMAGEM, IDIOMA, GENERO, FORMATO, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO)
+                VALUES ('$titulo', '$editora', '$autor', '$nomeFinal', '$idioma', '$genero', '$formato', $valor_compra, $ano_publicacao, '$estado');";
+
+        if ($conexao->query($sql) === TRUE) {
+            echo "<p>Livro cadastrado com sucesso!</p>";
+            echo "<a href='cadastro.html'>Cadastrar novo livro</a>";
+        } else {
+            echo "Erro ao inserir no banco: " . $conexao->error;
+        }
+    } else {
+        echo "Erro ao mover o arquivo de imagem.";
+    }
 } else {
-    echo "Erro: " . $conexao->error;
+    echo "Erro no envio da imagem.";
 }
-
-$conexao->close();
-?>
