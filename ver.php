@@ -136,6 +136,8 @@
                     ID LIKE '%$pesquisa%' OR
                     TITULO LIKE '%$pesquisa%' OR
                     EDITORA LIKE '%$pesquisa%' OR
+                    IDIOMA LIKE '%$pesquisa' OR
+                    GENERO LIKE '%$pesquisa' OR
                     AUTOR LIKE '%$pesquisa%' OR
                     IMAGEM LIKE '%$pesquisa%' OR
                     FORMATO LIKE '%$pesquisa%' OR
@@ -157,6 +159,8 @@
         <th>TITULLO</th>
         <th>EDITORA</th>
         <th>AUTOR</th>
+        <th>IDIOMA</th>
+        <th>GENERO</th>
         <th>IMAGEM</th>
         <th>FORMATO</th>
         <th>VALOR DA COMPRA</th>
@@ -169,13 +173,16 @@
         echo "
         <tr>
             <td>{$livros['id']}</td>
-            <td>{$livros['modelo']}</td>
-            <td>{$livros['marca']}</td>
-            <td>{$livros['potencia']}</td>
-            <td>{$livros['cor']}</td>
-            <td>{$livros['valor_compra']}</td>
-            <td>{$livros['valor_venda']}</td>
-            <td>{$livros['tipo']}</td>
+            <td>{$livros['TITULO']}</td>
+            <td>{$livros['EDITORA']}</td>
+            <td>{$livros['AUTOR']}</td>
+            <td>{$livros['IDIOMA']}</td>
+            <td>{$livros['GENERO']}</td>
+            <td>{$livros['IMAGEM']}</td>
+            <td>{$livros['FORMATOS']}</td>
+            <td>{$livros['VALOR DA COMPRAR']}</td>
+            <td>{$livros['ANO DA PUBLICAÇÂO']}</td>
+            <td>{$livros['ESTADO']}</td>
             <td>
                 <a href='delete.php?id={$livros['id']}'>Excluir</a>
             </td>
