@@ -13,6 +13,13 @@
     <label>Titulo: <input type="text" name="TITULO" required></label>
     <label>Editora: <input type="text" name="EDITORA" required></label>
     <label>Autor: <input type="text" name="AUTOR" required></label>
+    <label>IDIOMA: <input type="text" name="IDIOMA" required></label>
+     <label>Gênero:
+            <select name="GENERO" required>
+                <?php foreach ($GENEROS as $g): ?>
+                    <option value="<?= htmlspecialchars($g) ?>"><?= htmlspecialchars($g) ?></option>
+                <?php endforeach; ?>
+            </select>
     <label>Imagem: <input type="text" name="IMAGEM" required></label>
     <label>Formato:
         <select name="FORMATO" required>
