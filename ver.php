@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sucesso! | bestcarros</title>
+    <title>Consulta de Livros | Odisseia Literária</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <style>
         @charset "utf-8";
@@ -13,7 +13,7 @@
 
         :root {
             --font: "Josefin Sans", sans-serif;
-            --desaturated-red: #E9B954;
+            --primary-color: #E9B954;
         }
 
         * {
@@ -26,7 +26,8 @@
             width: 96vw;
             min-height: 100vh;
             font-family: var(--font);
-            background-color: var(--desaturated-red);
+            background-color: var(--primary-color);
+            padding-bottom: 50px;
         }
 
         table {
@@ -37,24 +38,23 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        th,
-        td {
+        th, td {
             padding: 12px 15px;
             border: 1px solid #ddd;
             text-align: left;
         }
 
         th {
-            background-color: white;
-            color: black;
+            background-color: #333;
+            color: white;
         }
 
         tr:nth-child(even) {
-            background-color: rgb(124, 124, 124);
+            background-color: #f2f2f2;
         }
 
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #e6e6e6;
         }
 
         nav {
@@ -62,45 +62,54 @@
             justify-content: center;
             background-color: white;
             padding: 20px;
-            width: 100vw;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         nav > a {
             color: black;
             text-decoration: none;
-            margin-right: 40px;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        nav > a:hover {
+            color: var(--primary-color);
         }
 
         legend {
             background-color: #333;
             color: white;
-            margin-bottom: -20px;
-            padding: 20px;
+            padding: 15px;
             width: 1400px;
             text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        #table {
+        #table-container {
             width: fit-content;
             margin: 40px auto 0 auto;
         }
 
         form {
             width: fit-content;
-            margin: 20px auto;
+            margin: 30px auto;
             text-align: center;
         }
 
         input[type="text"] {
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
             border-radius: 5px;
             border: 1px solid #ddd;
-            width: 300px;
+            width: 400px;
+            font-family: var(--font);
         }
 
         input[type="submit"] {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
             border-radius: 5px;
             border: none;
@@ -108,89 +117,131 @@
             color: white;
             margin-left: 10px;
             cursor: pointer;
+            font-family: var(--font);
+            transition: background-color 0.3s;
         }
 
         input[type="submit"]:hover {
             background-color: #555;
+        }
+
+        .book-cover {
+            width: 80px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .action-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .action-link:hover {
+            background-color: #333;
+            color: white;
+        }
+
+        .delete-link {
+            color: #d9534f;
+        }
+
+        .delete-link:hover {
+            background-color: #d9534f;
+            color: white;
         }
     </style>
 </head>
 
 <body>
     <nav>
-        <a href="cadastro.html">Cadastro</a>
-        <a href="ver.php">Verificação</a>
+        <a href="cadastro.html">Cadastrar Livro</a>
+        <a href="ver.php">Consultar Acervo</a>
     </nav>
 
     <form method="get" action="">
-        <input type="text" name="pesquisa" placeholder="Pesquisar livro" value="<?php echo isset($_GET['pesquisa']) ? htmlspecialchars($_GET['pesquisa']) : ''; ?>">
+        <input type="text" name="pesquisa" placeholder="Pesquisar por título, autor, editora..." 
+               value="<?php echo isset($_GET['pesquisa']) ? htmlspecialchars($_GET['pesquisa']) : ''; ?>">
         <input type="submit" value="Buscar">
     </form>
 
     <?php
     include 'conexao.php';
 
-    if (isset($_GET['pesquisa']) && !empty($_GET['pesquisa'])) {
-        $pesquisa = $conexao->real_escape_string($_GET['pesquisa']);
+    if ($conexao->connect_error) {
+        die("Erro de conexão: " . $conexao->connect_error);
+    }
+
+    if (isset($_GET['pesquisa']) && !empty(trim($_GET['pesquisa']))) {
+        $pesquisa = "%" . trim($_GET['pesquisa']) . "%";
         $sql = "SELECT * FROM LIVRARIA WHERE 
-                    ID LIKE '%$pesquisa%' OR
-                    TITULO LIKE '%$pesquisa%' OR
-                    EDITORA LIKE '%$pesquisa%' OR
-                    IDIOMA LIKE '%$pesquisa' OR
-                    GENERO LIKE '%$pesquisa' OR
-                    AUTOR LIKE '%$pesquisa%' OR
-                    IMAGEM LIKE '%$pesquisa%' OR
-                    FORMATO LIKE '%$pesquisa%' OR
-                    VALOR_COMPRA LIKE '%$pesquisa%' OR
-                    ANO_PUPLICACAO LIKE '%$pesquisa%'OR
-                    ESTADO LIKE '%$pesquisa%'";
+                TITULO LIKE ? OR
+                EDITORA LIKE ? OR
+                AUTOR LIKE ? OR
+                GENERO LIKE ? OR
+                FORMATO LIKE ?";
+        
+        $stmt = $conexao->prepare($sql);
+        $stmt->bind_param("sssss", $pesquisa, $pesquisa, $pesquisa, $pesquisa, $pesquisa);
+        $stmt->execute();
+        $result = $stmt->get_result();
     } else {
-        $sql = "SELECT * FROM ulos";
+        $sql = "SELECT * FROM LIVRARIA ORDER BY TITULO ASC";
+        $result = $conexao->query($sql);
     }
+    if ($result->num_rows > 0) {
+        echo '
+        <div id="table-container">
+            <table>
+                <legend>Acervo Literário</legend>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Editora</th>
+                    <th>Autor</th>
+                    <th>Gênero</th>
+                    <th>Formato</th>
+                    <th>Capa</th>
+                    <th>Valor (R$)</th>
+                    <th>Ano</th>
+                    <th>Estado</th>
+                    <th>Ações</th>
+                </tr>';
 
-    $ver = $conexao->query($sql);
+        while ($livro = $result->fetch_assoc()) {
+            echo '
+                <tr>
+                    <td>' . htmlspecialchars($livro['ID']) . '</td>
+                    <td>' . htmlspecialchars($livro['TITULO']) . '</td>
+                    <td>' . htmlspecialchars($livro['EDITORA']) . '</td>
+                    <td>' . htmlspecialchars($livro['AUTOR']) . '</td>
+                    <td>' . htmlspecialchars($livro['GENERO']) . '</td>
+                    <td>' . htmlspecialchars($livro['FORMATO']) . '</td>
+                    <td><img src="images/' . htmlspecialchars($livro['IMAGEM']) . '" alt="Capa do livro" class="book-cover"></td>
+                    <td>' . number_format($livro['VALOR_COMPRA'], 2, ',', '.') . '</td>
+                    <td>' . htmlspecialchars($livro['ANO_PUBLICACAO']) . '</td>
+                    <td>' . htmlspecialchars($livro['ESTADO']) . '</td>
+                    <td>
+                        <a href="editar.php?id=' . $livro['ID'] . '" class="action-link">Editar</a>
+                        <a href="delete.php?id=' . $livro['ID'] . '" class="action-link delete-link">Excluir</a>
+                    </td>
+                </tr>';
+        }
 
-    echo "
-    <div id='table'>
-    <table>
-    <legend>Tabela de veículos</legend>
-    <tr>
-        <th>ID</th>
-        <th>TITULLO</th>
-        <th>EDITORA</th>
-        <th>AUTOR</th>
-        <th>IDIOMA</th>
-        <th>GENERO</th>
-        <th>IMAGEM</th>
-        <th>FORMATO</th>
-        <th>VALOR DA COMPRA</th>
-        <th>ANO DA PUBLICAÇÃO</th>
-        <th>ESTADO</th>
-    </tr>
-    ";
-
-    while ($livros = $ver->fetch_assoc()) {
-        echo "
-        <tr>
-            <td>{$livros['id']}</td>
-            <td>{$livros['TITULO']}</td>
-            <td>{$livros['EDITORA']}</td>
-            <td>{$livros['AUTOR']}</td>
-            <td>{$livros['IDIOMA']}</td>
-            <td>{$livros['GENERO']}</td>
-            <td><img src='images/{$livros['IMAGEM']}' alt='Capa' width='100'></td>
-            <td>{$livros['FORMATOS']}</td>
-            <td>{$livros['VALOR DA COMPRAR']}</td>
-            <td>{$livros['ANO DA PUBLICAÇÂO']}</td>
-            <td>{$livros['ESTADO']}</td>
-            <td>
-                <a href='delete.php?id={$livros['id']}'>Excluir</a>
-            </td>
-        </tr>
-        ";
+        echo '
+            </table>
+        </div>';
+    } else {
+        echo '<p style="text-align: center; margin-top: 30px; font-size: 1.2rem;">Nenhum livro encontrado no acervo.</p>';
     }
-
-    echo "</table></div>";
+    if (isset($stmt)) {
+        $stmt->close();
+    }
+    $conexao->close();
     ?>
 </body>
 
