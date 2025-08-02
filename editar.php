@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     $stmt = $conexao->prepare("UPDATE LIVRARIA SET TITULO=?, AUTOR=?, EDITORA=?, VALOR_COMPRA=?, ANO_PUBLICACAO=?, ESTADO=?, IMAGEM=? WHERE ID=?");
-    $stmt->bind_param("sssdisssi", $titulo, $autor, $editora, $valor, $ano, $estado, $imagem_nome, $id);
+    $stmt->bind_param("sssdissi", $titulo, $autor, $editora, $valor, $ano, $estado, $imagem_nome, $id);
     $stmt->execute();
     $stmt->close();
 
