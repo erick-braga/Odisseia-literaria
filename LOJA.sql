@@ -32,7 +32,7 @@ CREATE TABLE `LIVRARIA` (
   `TITULO` varchar(150) NOT NULL,
   `EDITORA` varchar(100) NOT NULL,
   `AUTOR` varchar(100) NOT NULL,
-  `IDIOMA` varcahr(50) NOT NULL,
+  `IDIOMA` varchar(50) NOT NULL,
   `GENERO` enum('Romance','Conto','Crônica','Poesia','Fábula','Drama',
   'Comédia','Tragédia','Auto','Ensaios','Literatura Infantil','Literatura Juvenil','Biografia','Autobiografia',
   'Memórias','Epistolar','Fantasia','Ficção Científica','Terror','Suspense','Mistério','Aventura','Histórico',
