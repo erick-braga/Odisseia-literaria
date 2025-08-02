@@ -1,51 +1,98 @@
-<?php
-$GENEROS = ['Romance','Conto','Crônica','Poesia','Fábula','Drama','Comédia','Tragédia','Auto','Ensaios','Literatura Infantil','Literatura Juvenil','Biografia','Autobiografia','Memórias','Epistolar','Fantasia','Ficção Científica','Terror','Suspense','Mistério','Aventura','Histórico','Policial','Psicológico','Erótico','Didático','Religioso','Espiritualista','Autoajuda','Humor','Satírico','Lírico','Épico','Narrativo','Dramático','Gótico','Distopia','Utopia','Realismo Mágico','Regionalista','Naturalismo','Romantismo','Modernismo','Pós-modernismo','Realismo','Simbolismo','Expressionismo','Existencialismo','Surrealismo'];
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de livros</title>
+    <title>Cadastro de Livros</title>
 </head>
 <body>
     <header>
         <h1>Cadastro de livros</h1>
     </header>
     <main>
-<form action="inserir_livro.php" method="POST">
-    <label>Titulo: <input type="text" name="TITULO" required></label>
-    <label>Editora: <input type="text" name="EDITORA" required></label>
-    <label>Autor: <input type="text" name="AUTOR" required></label>
-    <label>IDIOMA: <input type="text" name="IDIOMA" required></label>
-     <label>Gênero:
-            <select name="GENERO" required>
-                <?php foreach ($GENEROS as $g): ?>
-                    <option value="<?= htmlspecialchars($g) ?>"><?= htmlspecialchars($g) ?></option>
-                <?php endforeach; ?>
-            </select>
-  <label>Imagem: <input type="file" name="IMAGEM" accept="image/*" required></label><br>
-    <label>Formato:
-        <select name="FORMATO" required>
-            <option value="FISICO">Físico</option>
-            <option value="DIGITAL">Digital</option>
-        </select>
-    </label>
-    <label>Valor de Compra:
-        <input type="number" name="VALOR_COMPRA" step="0.01" required>
-    </label>
-    <label>Ano de Publicação:
-        <input type="number" name="ANO_PUBLICACAO" required>
-    </label>
-    <label>Estado:
-        <select name="ESTADO" required>
-            <option value="NOVO">Novo</option>
-            <option value="SEMINOVO">Seminovo</option>
-            <option value="USADO">Usado</option>
-        </select>
-    </label>
-    <button type="submit">Cadastrar Livro</button>
-</form>
+        <form action="inserir_livro.php" method="POST" enctype="multipart/form-data">
+            <label>Título: <input type="text" name="TITULO" required></label><br>
+            <label>Editora: <input type="text" name="EDITORA" required></label><br>
+            <label>Autor: <input type="text" name="AUTOR" required></label><br>
+            <label>Idioma: <input type="text" name="IDIOMA" required></label><br>
 
+            <label>Gênero:
+                <select name="GENERO" required>
+                    <option value="Romance">Romance</option>
+                    <option value="Conto">Conto</option>
+                    <option value="Crônica">Crônica</option>
+                    <option value="Poesia">Poesia</option>
+                    <option value="Fábula">Fábula</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Tragédia">Tragédia</option>
+                    <option value="Auto">Auto</option>
+                    <option value="Ensaios">Ensaios</option>
+                    <option value="Literatura Infantil">Literatura Infantil</option>
+                    <option value="Literatura Juvenil">Literatura Juvenil</option>
+                    <option value="Biografia">Biografia</option>
+                    <option value="Autobiografia">Autobiografia</option>
+                    <option value="Memórias">Memórias</option>
+                    <option value="Epistolar">Epistolar</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Ficção Científica">Ficção Científica</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Suspense">Suspense</option>
+                    <option value="Mistério">Mistério</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Histórico">Histórico</option>
+                    <option value="Policial">Policial</option>
+                    <option value="Psicológico">Psicológico</option>
+                    <option value="Erótico">Erótico</option>
+                    <option value="Didático">Didático</option>
+                    <option value="Religioso">Religioso</option>
+                    <option value="Espiritualista">Espiritualista</option>
+                    <option value="Autoajuda">Autoajuda</option>
+                    <option value="Humor">Humor</option>
+                    <option value="Satírico">Satírico</option>
+                    <option value="Lírico">Lírico</option>
+                    <option value="Épico">Épico</option>
+                    <option value="Narrativo">Narrativo</option>
+                    <option value="Dramático">Dramático</option>
+                    <option value="Gótico">Gótico</option>
+                    <option value="Distopia">Distopia</option>
+                    <option value="Utopia">Utopia</option>
+                    <option value="Realismo Mágico">Realismo Mágico</option>
+                    <option value="Regionalista">Regionalista</option>
+                    <option value="Naturalismo">Naturalismo</option>
+                    <option value="Romantismo">Romantismo</option>
+                    <option value="Modernismo">Modernismo</option>
+                    <option value="Pós-modernismo">Pós-modernismo</option>
+                    <option value="Realismo">Realismo</option>
+                    <option value="Simbolismo">Simbolismo</option>
+                    <option value="Expressionismo">Expressionismo</option>
+                    <option value="Existencialismo">Existencialismo</option>
+                    <option value="Surrealismo">Surrealismo</option>
+                </select>
+            </label><br>
+
+            <label>Imagem: <input type="file" name="IMAGEM" accept="image/*" required></label><br>
+
+            <label>Formato:
+                <select name="FORMATO" required>
+                    <option value="FISICO">Físico</option>
+                    <option value="DIGITAL">Digital</option>
+                </select>
+            </label><br>
+
+            <label>Valor de Compra: <input type="number" name="VALOR_COMPRA" step="0.01" required></label><br>
+
+            <label>Ano de Publicação: <input type="number" name="ANO_PUBLICACAO" required></label><br>
+
+            <label>Estado:
+                <select name="ESTADO" required>
+                    <option value="NOVO">Novo</option>
+                    <option value="SEMINOVO">Seminovo</option>
+                    <option value="USADO">Usado</option>
+                </select>
+            </label><br>
+
+            <button type="submit">Cadastrar Livro</button>
+        </form>
     </main>
 </body>
 </html>
