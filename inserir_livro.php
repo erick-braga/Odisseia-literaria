@@ -37,3 +37,4 @@ if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
 } else {
     echo "Erro no envio da imagem.";
 }
+?>
