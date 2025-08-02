@@ -12,6 +12,17 @@ if ($conexao->connect_error) {
     die("Erro na conexão: " . $conexao->connect_error);
 }
 
+if (isset($_GET['excluir'])) {
+    $id = intval($_GET['excluir']);
+    $stmt = $conexao->prepare("DELETE FROM LIVRARIA WHERE ID = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+    
+    header("Location: ver.php"); //recarega a pagina
+    exit;
+}
+
 $sql = "SELECT ID, TITULO, AUTOR, EDITORA, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO, IMAGEM FROM LIVRARIA";
 $resultado = $conexao->query($sql);
 
@@ -49,6 +60,7 @@ if (!$resultado) {
                     <?php else: ?>
                     Sem imagem
                     <?php endif; ?>
+        
                 </td>
                 <td><?= htmlspecialchars($livro['TITULO'] ?? '') ?></td>
                 <td><?= htmlspecialchars($livro['AUTOR'] ?? '') ?></td>
@@ -57,6 +69,15 @@ if (!$resultado) {
                 <td><?= $livro['ANO_PUBLICACAO'] ?></td>
                 <td><?= $livro['ESTADO'] ?></td>
             </tr>
+            <td>
+    <form method="get" action="" style="display:inline;"> //botão para excluir 
+        <input type="hidden" name="excluir" value="<?= $livro['ID'] ?>">
+        <button type="submit" class="btn-excluir" 
+                onclick="return confirm('Tem certeza que deseja excluir este livro?')">
+            Excluir
+        </button>
+    </form>
+</td>
             <?php endwhile; ?>
         </table>
     <?php else: ?>
@@ -67,4 +88,5 @@ if (!$resultado) {
 </body>
 </html>
                            
+
 
