@@ -70,14 +70,15 @@ if (!$resultado) {
                 <td><?= $livro['ESTADO'] ?></td>
             </tr>
             <td>
-        <form method="get" action="" style="display:inline;"> //botão para excluir 
+    
+        <form method="get" action="" style="display:inline;"> // botão para excluir 
             <input type="hidden" name="excluir" value="<?= $livro['ID'] ?>">
             <button type="submit" class="btn-excluir" 
                     onclick="return confirm('Tem certeza que deseja excluir este livro?')">
                 Excluir
             </button>
         </form>
-    </td>
+            </td>
             <?php endwhile; ?>
         </table>
     <?php else: ?>
@@ -88,6 +89,7 @@ if (!$resultado) {
 </body>
 </html>
                            
+
 
 
 
