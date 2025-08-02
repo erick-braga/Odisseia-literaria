@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+error_reporting(E_ALL);//se de erros imprime na tela
 ini_set('display_errors', 1);
 
 if (!file_exists('conecxao.php')) {
@@ -41,7 +41,7 @@ if (!$resultado) {
                 <th>Ano</th>
                 <th>Estado</th>
             </tr>
-            <?php while ($livro = $resultado->fetch_assoc()): ?>
+            <?php while ($livro = $resultado->fetch_assoc()): ?>  //percorre todas as linhas da tabela, qunaod não tiver mais nem uma retornaz null
             <tr>
               <td><?= $livro['ID'] ?></td>
   <td><?php if(!empty($livro['IMAGEM'])): ?>
@@ -67,3 +67,4 @@ if (!$resultado) {
 </body>
 </html>
                            
+
