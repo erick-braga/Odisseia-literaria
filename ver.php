@@ -79,6 +79,12 @@ if (!$resultado) {
             </button>
         </form>
             </td>
+            <td>
+    <form method="get" action="editar.php" style="display:inline;">
+        <input type="hidden" name="id" value="<?= $livro['ID'] ?>">
+        <button type="submit">Editar</button>
+    </form>
+</td>
             <?php endwhile; ?>
         </table>
     <?php else: ?>
@@ -89,7 +95,3 @@ if (!$resultado) {
 </body>
 </html>
                            
-
-
-
-
