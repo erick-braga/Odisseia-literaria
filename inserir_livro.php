@@ -1,10 +1,10 @@
 
 <?php
-ini_set('display_errors', 1);
+ini_set('display_errors', 1);  //imprime erros
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include("conecxao.php"); 
+include("conecxao.php"); //inclue o codigo
 
 $titulo = $_POST['TITULO'] ?? ''; //o ?? verifica se é null, se é nulo e pode ser nulo resebe o valor resebido, se é null e não pode ser4 recebe padrão
 $editora = $_POST['EDITORA'] ?? '';
@@ -17,9 +17,9 @@ $ano_publicacao = $_POST['ANO_PUBLICACAO'] ?? '';
 $estado = $_POST['ESTADO'] ?? '';
 
 $diretorio = "images/";
-$nomeFinal = 'sem-imagem.jpg';
+$nomeFinal = 'sem-imagem.jpg'; //se não incluir imagem não da erro, pois, acaba adicionando esta
 if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
-    $permitidos = ['image/jpeg', 'image/png', 'image/gif'];
+    $permitidos = ['image/jpeg', 'image/png', 'image/gif'];//tipos de imagem permitidos
     if (!in_array($_FILES['IMAGEM']['type'], $permitidos)) {
         die("Tipo de arquivo não permitido. Apenas imagens JPEG, PNG ou GIF são aceitas.");
     }
@@ -28,7 +28,7 @@ if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
     $nomeFinal = uniqid() . '.' . $extensao;
     $caminhoFinal = $diretorio . $nomeFinal;
 
-    if (!move_uploaded_file($_FILES['IMAGEM']['tmp_name'], $caminhoFinal)) {
+    if (!move_uploaded_file($_FILES['IMAGEM']['tmp_name'], $caminhoFinal)) {  //se não consegior adicionar no diretorio da erro
         die("Erro ao mover o arquivo de imagem para o diretório de destino.");
     }
 } elseif (isset($_FILES['IMAGEM'])) {
@@ -49,9 +49,9 @@ if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
 $sql = "INSERT INTO LIVRARIA (TITULO, EDITORA, AUTOR, IMAGEM, IDIOMA, GENERO, FORMATO, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-$stmt = $conexao->prepare($sql);
-$stmt->bind_param(
-    "sssssssdss",
+$stmt = $conexao->prepare($sql); //variavel de conecção bem sucedida
+$stmt->bind_param( //garante tipagem correta dos dados
+    "sssssssdss",//define os parametros do bind_paran, no caso string e double
     $titulo,
     $editora,
     $autor,
