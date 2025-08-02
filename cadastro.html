@@ -20,7 +20,7 @@
                     <option value="<?= htmlspecialchars($g) ?>"><?= htmlspecialchars($g) ?></option>
                 <?php endforeach; ?>
             </select>
-    <label>Imagem: <input type="text" name="IMAGEM" required></label>
+  <label>Imagem: <input type="file" name="IMAGEM" accept="image/*" required></label><br>
     <label>Formato:
         <select name="FORMATO" required>
             <option value="FISICO">Físico</option>
