@@ -1,28 +1,29 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include("conecxao.php");
 
 $titulo = $_POST['TITULO'];
 $editora = $_POST['EDITORA'];
 $autor = $_POST['AUTOR'];
 $idioma = $_POST['IDIOMA'];
-$GENERO = $_POST['GENERO'];
+$genero = $_POST['GENERO']; // Corrigido
 $formato = $_POST['FORMATO'];
 $valor_compra = $_POST['VALOR_COMPRA'];
 $ano_publicacao = $_POST['ANO_PUBLICACAO'];
 $estado = $_POST['ESTADO'];
 
-
-// Diretório de destino das imagens
 $diretorio = "images/";
 
-// Verifica se a imagem foi enviada corretamente
 if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
     $nomeTemporario = $_FILES['IMAGEM']['tmp_name'];
     $nomeFinal = basename($_FILES['IMAGEM']['name']);
     $caminhoFinal = $diretorio . $nomeFinal;
-        
-    if (move_uploaded_file($nomeTemporario, $caminhoFinal)) { 
-        $sql = "INSERT INTO LIVRARIA(TITULO, EDITORA, AUTOR, IMAGEM, IDIOMA, GENERO, FORMATO, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO)
+
+    if (move_uploaded_file($nomeTemporario, $caminhoFinal)) {
+        $sql = "INSERT INTO LIVRARIA (TITULO, EDITORA, AUTOR, IMAGEM, IDIOMA, GENERO, FORMATO, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO)
                 VALUES ('$titulo', '$editora', '$autor', '$nomeFinal', '$idioma', '$genero', '$formato', $valor_compra, $ano_publicacao, '$estado');";
 
         if ($conexao->query($sql) === TRUE) {
@@ -35,6 +36,6 @@ if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
         echo "Erro ao mover o arquivo de imagem.";
     }
 } else {
-    echo "Erro no envio da imagem.";
+    echo "Erro no envio da imagem. Código do erro: " . $_FILES['IMAGEM']['error'];
 }
 ?>
