@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+    --font: "Caudex", serif;
+
+    --roxo-profundo: #1d0031;
+    --lavanda-suave: #C8A2C8;
+    --berinjela-neutro: #5D496B;
+    --lilas-claro: #E8DAEF;
+}
+
+body {
+    font-family: var(--font);
+    background-color: var(--roxo-profundo);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    gap: -10px;
+    width: 70%;
+
+}
+
+label {}
+
+#image {
+    margin-right: -01px;
+    height: 90%;
+    background-color: white;
+    width: 40%;
+    border: 1PX SOLID black;
+    border-radius: 20px 0px 0px 20px;
+    /*     background-image: url(../livros-img/1984.jpg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat; */
+}
+
+#image>img {
+    height: 100%;
+    display: block;
+    margin: auto;
+
+    object-fit: cover;
+}
+
+#form {
+    padding: 15px;
+    height: 90%;
+    background-color: white;
+        border-radius: 0px 20px 20px 0px;
+
+    /*     border: 1PX SOLID black;
+ */
+}
+
+#form>h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-variant: small-caps;
+    font-weight: normal;
+}
+
+/* ----------------- > */
+label {
+    display: none;
+}
+
+input {
+    border: 0px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    width: 100%;
+    padding: 3px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input::placeholder {
+    font-weight: bolder;
+}
+
+button {
+    width: 100%;
+    margin-top: 24px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+
+
+
+#image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#input-file {}

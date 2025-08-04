@@ -1,4 +1,3 @@
-
 <?php
 ini_set('display_errors', 1);  //imprime erros
 ini_set('display_startup_errors', 1);

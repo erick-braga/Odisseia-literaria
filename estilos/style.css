@@ -2,9 +2,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
 
 :root {
     --font: "Caudex", serif;
+    --font-family: "Cormorant Garamond", serif;
+
 
     --roxo-profundo: #1d0031;
     --lavanda-suave: #C8A2C8;
@@ -55,8 +58,9 @@ main {
     padding: 50px;
     border-radius: 10px;
     gap: 30px;
-/*     border: 1px solid black;
- */    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.199);
+    /*     border: 1px solid black;
+ */
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.199);
     color: white;
 }
 
