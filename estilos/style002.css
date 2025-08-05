@@ -44,6 +44,8 @@ label {}
     width: 40%;
     border: 1PX SOLID black;
     border-radius: 20px 0px 0px 20px;
+    min-height: 750px;
+
     /*     background-image: url(../livros-img/1984.jpg);
     background-position: center;
     background-size: contain;
@@ -62,7 +64,8 @@ label {}
     padding: 15px;
     height: 90%;
     background-color: white;
-        border-radius: 0px 20px 20px 0px;
+    border-radius: 0px 20px 20px 0px;
+    min-height: 750px;
 
     /*     border: 1PX SOLID black;
  */
@@ -83,7 +86,7 @@ input {
     border: 0px;
     border-bottom: 1px solid rgb(224, 224, 224);
     width: 100%;
-    padding: 3px;
+    padding: 0px;
 }
 
 select {
@@ -96,7 +99,7 @@ input::placeholder {
     font-weight: bolder;
 }
 
-button {
+#submit {
     width: 100%;
     margin-top: 24px;
     border-radius: 10px;
