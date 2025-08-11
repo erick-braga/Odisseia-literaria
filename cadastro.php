@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Livros | Cadastre seu livro</title>
+    <title>Cadastro de Livros | Odisséia Literária</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="estilos/style002.css">
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <style>
@@ -171,7 +171,6 @@
                     <label for="genero">Gênero:</label><br>
                     <select id="genero" name="GENERO" required>
                         <option value="" disabled selected>Gênero</option>
-                        <!-- suas opções seguem abaixo -->
                         <option value="Romance">Romance</option>
                         <option value="Conto">Conto</option>
                         <option value="Crônica">Crônica</option>
@@ -243,20 +242,17 @@
                     <label for="imagem">Imagem:</label><br>
                     <input type="file" id="imagem" name="IMAGEM" accept="image/*" required><br>
                     <?php
-                    // Verificar se o formulário foi enviado e se a imagem foi enviada
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['IMAGEM'])) {
-                        $imagem = $_FILES['IMAGEM']['name'];  // Nome original do arquivo
-                        $target_dir = "imagens/";  // Diretório onde a imagem será salva
-                        $target_file = $target_dir . basename($imagem);  // Caminho completo do arquivo
-                    
-                        // Verificar se o arquivo é uma imagem válida
+                        $imagem = $_FILES['IMAGEM']['name'];
+                        $target_dir = "imagens/";
+                        $target_file = $target_dir . basename($imagem);
+
+
                         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                         $valid_extensions = array("jpg", "jpeg", "png", "gif");
 
                         if (in_array($imageFileType, $valid_extensions)) {
-                            // Tenta mover o arquivo para o diretório de upload
                             if (move_uploaded_file($_FILES['IMAGEM']['tmp_name'], $target_file)) {
-                                // Exibir a imagem carregada
                                 echo "<h2>Imagem do Livro:</h2>";
                                 echo "<img src='$target_file' alt='Imagem do livro' style='width: 200px; height: auto; border-radius: 10px;'>";
                             } else {

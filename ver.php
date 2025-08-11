@@ -29,12 +29,17 @@ $resultado = $conexao->query($sql);
 
 <head>
     <meta charset="UTF-8">
-    <title>Acervo Literário</title>
+    <title>Acervo Literário | Odisséia Literária</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap');
+
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
 
         :root {
             --font: 'Caudex', serif;
@@ -50,6 +55,7 @@ $resultado = $conexao->query($sql);
             color: white;
             margin: 0;
             padding: 0;
+
         }
 
         .navbar {
@@ -377,6 +383,10 @@ $resultado = $conexao->query($sql);
             .modal__title {
                 font-size: 2rem;
             }
+
+            #link-a:hover {
+                background-color: rgba(65, 0, 82, 1);
+            }
         }
     </style>
 </head>
@@ -400,7 +410,6 @@ $resultado = $conexao->query($sql);
 
     <div id="ccard"></div>
 
-    <a href="cadastro.html" class="link-cadastro">Cadastrar Novo Livro</a>
     <h1 class="titulo-pagina">Acervo de Livros (cadastrado)</h1>
 
     <hr style="margin: auto; margin-bottom: 30px; text-align: center; height: 2px; width: 60%; color: black;">
@@ -438,15 +447,6 @@ $resultado = $conexao->query($sql);
 
         </div>
 
-        <a href="#" class="hero__cta">Join us!</a>
-
-
-        <section class="modal ">
-            <div class="modal__container">
-                <a href="#" class="modal__close">Cerrar Modal</a>
-            </div>
-        </section>
-
     <?php else: ?>
         <p style="text-align: center; color: white;">Nenhum livro cadastrado no acervo.</p>
     <?php endif; ?>
@@ -455,20 +455,14 @@ $resultado = $conexao->query($sql);
 
     <?php $conexao->close(); ?>
 
+    <a href="cadastro.php" style="
+    width: 100%; padding: 20px; background-color: purple;
+        margin-bottom: -60px; color: white;
+
+
+    " class="link-cadastro" id="link-a">Cadastrar Novo Livro</a>
+
     <script>
-        const openModal = document.querySelector('.hero__cta');
-        const modal = document.querySelector('.modal');
-        const closeModal = document.querySelector('.modal__close');
-
-        openModal.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.add('modal--show');
-        });
-
-        closeModal.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.remove('modal--show');
-        });
     </script>
 </body>
 

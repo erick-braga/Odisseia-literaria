@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: purple;
+        }
+
+        #sucesso {
+            background-color: white;
+            padding: 40px;
+            width: 200px;
+            border-radius: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
 <?php
 ini_set('display_errors', 1);  //imprime erros
 ini_set('display_startup_errors', 1);
@@ -62,10 +97,12 @@ $stmt->bind_param( //garante tipagem correta dos dados
     $ano_publicacao,
     $estado
 );
-
 if ($stmt->execute()) {
-    echo "<p>Livro cadastrado com sucesso!</p>";
-    echo "<a href='cadastro.html'>Cadastrar novo livro</a>";
+    echo "    <div id='sucesso'>
+        <p>Livro cadastrado com sucesso!</p>
+        <a href='cadastro.php'>Cadastrar novo livro!</a>
+    </div>";
+
 } else {
     echo "Erro ao inserir no banco: " . $stmt->error;
 }
