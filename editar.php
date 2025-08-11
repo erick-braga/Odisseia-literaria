@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $extensao = pathinfo($_FILES['nova_imagem']['name'], PATHINFO_EXTENSION);
         $imagem_nome = uniqid() . "." . $extensao;
 
-      
+
         move_uploaded_file($_FILES['nova_imagem']['tmp_name'], "images/" . $imagem_nome);
-      
+
         if (!empty($livro_antigo['IMAGEM']) && file_exists("images/" . $livro_antigo['IMAGEM'])) {
             unlink("images/" . $livro_antigo['IMAGEM']);
         }
@@ -61,22 +61,32 @@ $stmt->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
     <title>Editar Livro</title>
 </head>
+
 <body>
     <h1>Editar Livro</h1>
 
     <form method="post" action="editar.php" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $livro['ID'] ?>">
 
-        <label>Título: <input type="text" name="titulo" value="<?= htmlspecialchars($livro['TITULO']) ?>" required></label><br>
-        <label>Autor: <input type="text" name="autor" value="<?= htmlspecialchars($livro['AUTOR']) ?>" required></label><br>
-        <label>Editora: <input type="text" name="editora" value="<?= htmlspecialchars($livro['EDITORA']) ?>" required></label><br>
-        <label>Valor: <input type="text" name="valor" value="<?= number_format($livro['VALOR_COMPRA'], 2, ',', '') ?>" required></label><br>
-        <label>Ano de Publicação: <input type="number" name="ano" value="<?= $livro['ANO_PUBLICACAO'] ?>" required></label><br>
-        <label>Estado: <input type="text" name="estado" value="<?= htmlspecialchars($livro['ESTADO']) ?>" required></label><br>
+        <label>Título: <input type="text" name="titulo" value="<?= htmlspecialchars($livro['TITULO']) ?>"
+                required></label><br>
+        <label>Autor: <input type="text" name="autor" value="<?= htmlspecialchars($livro['AUTOR']) ?>"
+                required></label><br>
+        <label>Editora: <input type="text" name="editora" value="<?= htmlspecialchars($livro['EDITORA']) ?>"
+                required></label><br>
+        <label>Valor: <input type="text" name="valor" value="<?= number_format($livro['VALOR_COMPRA'], 2, ',', '') ?>"
+                required></label><br>
+        <label>Ano de Publicação: <input type="number" name="ano" value="<?= $livro['ANO_PUBLICACAO'] ?>"
+                required></label><br>
+        <label>Estado: <input type="text" name="estado" value="<?= htmlspecialchars($livro['ESTADO']) ?>"
+                required></label><br>
 
         <p>Imagem atual:</p>
         <?php if (!empty($livro['IMAGEM'])): ?>
@@ -91,4 +101,5 @@ $stmt->close();
         <a href="ver.php">Cancelar</a>
     </form>
 </body>
+
 </html>

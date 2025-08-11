@@ -37,6 +37,7 @@ header {
 
 body {
     background-color: var(--roxo-profundo);
+    background-image: linear-gradient(to top, var(--roxo-profundo)60%, #440072);
     width: 100vw;
     height: 100vh;
     font-family: var(--font);
@@ -81,7 +82,7 @@ main p {
 main a {
     background-color: var(--lavanda-suave);
     padding: 20px;
-    width: 84%;
+    width: 40%;
     text-align: center;
     display: inline-block;
     margin-top: 20px;
@@ -108,26 +109,3 @@ header a {
 }
 
 /* felx box */
-
-header {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-around;
-    gap: 10px;
-}
-
-nav {
-    padding: 0px 10px;
-    flex-flow: row wrap;
-    display: flex;
-    gap: 10px;
-}
-
-nav>a {
-    display: inline-block;
-    flex: 0 1 68px;
-    border: 1px solid;
-    border-radius: 30px;
-
-}

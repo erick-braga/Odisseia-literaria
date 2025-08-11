@@ -16,8 +16,16 @@
 
 body {
     font-family: var(--font);
-    background-color: var(--roxo-profundo);
+    background-image: linear-gradient(to top, var(--roxo-profundo)60%, #440072);
+    width: 100vw;
+    height: 100vh;
 }
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
 
 * {
     margin: 0;
@@ -42,7 +50,8 @@ label {}
     height: 90%;
     background-color: white;
     width: 40%;
-    border: 1PX SOLID black;
+    
+    border: 10px solid white;
     border-radius: 20px 0px 0px 20px;
     min-height: 750px;
 

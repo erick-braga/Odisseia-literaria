@@ -6,39 +6,146 @@
     <title>Cadastro de Livros | Cadastre seu livro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="estilos/style002.css">
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-image: linear-gradient(to top, var(--roxo-profundo)60%, #440072);
+            height: 100vh;
+        }
+
+        header {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        nav {
+            padding: 0px 10px;
+            flex-flow: row wrap;
+            display: flex;
+            gap: 10px;
+        }
+
+        nav>a {
+            display: inline-block;
+            flex: 0 1 68px;
+            border: 1px solid;
+            border-radius: 30px;
+
+        }
+
+        .hero {
+            background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+            color: #fff;
+            display: grid;
+            grid-template-rows: max-content 1fr;
+            grid-template-areas:
+                "nav"
+                "content";
+            min-height: 100vh;
+        }
+
+        .nav {
+            grid-area: nav;
+            display: grid;
+            justify-content: space-between;
+            grid-auto-flow: column;
+            gap: 1em;
+            align-items: center;
+            height: 90px;
+        }
+
+        .nav__list {
+            list-style: none;
+            display: grid;
+            grid-auto-flow: column;
+            gap: 1em;
+        }
+
+        .nav__link {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav__logo {
+            margin-top: 10px;
+            width: 200px;
+            font-weight: 300;
+        }
+
+        .nav__menu {
+            display: none;
+        }
+
+        .nav__icon {
+            width: 30px;
+        }
+
+        /* --- */
+
+
+        @media (max-width:800px) {
+            .nav__list {
+                display: none;
+            }
+
+            .nav__menu {
+                display: block;
+            }
+
+            .hero__main {
+                grid-template-columns: 1fr;
+                grid-template-rows: max-content max-content;
+                text-align: center;
+            }
+
+            .hero__picture {
+                grid-row: 1/2;
+            }
+
+            .hero__img {
+                max-width: 500px;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .modal__container {
+                padding: 2em 1.5em;
+            }
+
+            .modal__title {
+                font-size: 2rem;
+            }
+        }
+
+        #image {
+            border: 10px solid white;
+
+        }
+    </style>
 
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg" style="background-color: #1d0031; padding: 0.75rem 1rem;">
-        <div class="container-fluid div-sla">
-            <a class="navbar-brand text-white" href="#" style="margin-right: -220px;"><img src="img/Logo.png" id="img"
-                    alt="" style="width: 180px; margin-left: 80px;"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-            </button>
+    <div id="nav-her">
+        <nav class="nav container">
+            <a href="index.html" style="border: 0;"><img src="img/Logo.png" class="nav__logo" alt=""></a>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
+                <li class="nav__item"><a href="cadastro.php" class="nav__link">Cadastrar</a></li>
+                <li class="nav__item"><a href="ver.php" class="nav__link">Livros</a></li>
+            </ul>
+            <figure class="nav__menu">
+                <img src="img/menu.svg" class="nav__icon">
+            </figure>
+        </nav>
+    </div>
 
-            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-0 mb-lg-0  mx-auto" style="font-size: 2em;">
-                    <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" href="index.html">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="cadastro.html">Cadastro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled text-white-50" aria-disabled="true" href="ver.php">Comprar</a>
-                    </li>
-                </ul>
-
-
-            </div>
-        </div>
-    </nav>
     <main>
         <div class="container">
             <div id="image">
@@ -130,7 +237,8 @@
                     <input type="number" id="valor" name="VALOR_COMPRA" step="0.01" required placeholder="Valor"><br>
 
                     <label for="ano">Ano de Publicação:</label><br>
-                    <input type="number" id="ano" name="ANO_PUBLICACAO" required placeholder="Ano"><br>
+                    <input type="number" id="ano" name="ANO_PUBLICACAO" required placeholder="Ano" min-lenght="4"
+                        max-lenght="4"><br>
 
                     <label for="imagem">Imagem:</label><br>
                     <input type="file" id="imagem" name="IMAGEM" accept="image/*" required><br>
@@ -140,7 +248,7 @@
                         $imagem = $_FILES['IMAGEM']['name'];  // Nome original do arquivo
                         $target_dir = "imagens/";  // Diretório onde a imagem será salva
                         $target_file = $target_dir . basename($imagem);  // Caminho completo do arquivo
-
+                    
                         // Verificar se o arquivo é uma imagem válida
                         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                         $valid_extensions = array("jpg", "jpeg", "png", "gif");

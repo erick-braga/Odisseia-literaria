@@ -30,6 +30,8 @@ $resultado = $conexao->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Acervo Literário</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap');
@@ -88,8 +90,9 @@ $resultado = $conexao->query($sql);
             border-radius: 10px;
             padding: 1rem;
             color: #000;
-/*             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
- */            display: flex;
+            /*             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+ */
+            display: flex;
             flex-direction: column;
             align-items: center;
             transition: transform 0.2s;
@@ -108,15 +111,15 @@ $resultado = $conexao->query($sql);
         }
 
         .card-livro h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
-            text-align: center;
+            text-align: ;
         }
 
         .card-livro p {
             font-size: 0.9rem;
             margin: 2px 0;
-            text-align: center;
+            text-align: left;
         }
 
         .preco {
@@ -152,48 +155,256 @@ $resultado = $conexao->query($sql);
             width: 100%;
             color: white;
         }
+
+        .todo {
+            background-image: linear-gradient(to top, var(--roxo-profundo)20%, #440072);
+            width: 100vw;
+            padding: 0px 0px 20px 0px;
+            margin-bottom: -30px;
+        }
+
+        /*  */
+
+        .hero {
+            background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+            color: #fff;
+            display: grid;
+            grid-template-rows: max-content 1fr;
+            grid-template-areas:
+                "nav"
+                "content";
+            min-height: 100vh;
+        }
+
+        body {}
+
+        .nav {
+            grid-area: nav;
+
+            display: grid;
+            justify-content: space-between;
+            grid-auto-flow: column;
+            gap: 1em;
+            align-items: center;
+            height: 90px;
+
+        }
+
+        .nav__list {
+            list-style: none;
+            display: grid;
+            grid-auto-flow: column;
+            gap: 1em;
+        }
+
+        .nav__link {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav__logo {
+            margin-top: 10px;
+            width: 200px;
+            font-weight: 300;
+        }
+
+        .nav__menu {
+            display: none;
+        }
+
+        .nav__icon {
+            width: 30px;
+        }
+
+        /* --- */
+
+
+        @media (max-width:800px) {
+            .nav__list {
+                display: none;
+            }
+
+            .nav__menu {
+                display: block;
+            }
+
+            .hero__main {
+                grid-template-columns: 1fr;
+                grid-template-rows: max-content max-content;
+                text-align: center;
+            }
+
+            .hero__picture {
+                grid-row: 1/2;
+            }
+
+            .hero__img {
+                max-width: 500px;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .modal__container {
+                padding: 2em 1.5em;
+            }
+
+            .modal__title {
+                font-size: 2rem;
+            }
+        }
+
+        #imgss {
+            height: 30px;
+            width: 400px:
+        }
+
+        #imgss>img {
+            object-fit: cover;
+        }
+
+        #ccard {
+            margin-top: 30px;
+            background-image: url("img/livros.jpg");
+            height: 600px;
+            width: 100%;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        /* ----- */
+
+
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #111111bd;
+            display: flex;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .6s .9s;
+            --transform: translateY(-100vh);
+            --transition: transform .8s;
+        }
+
+        .modal--show {
+            opacity: 1;
+            pointer-events: unset;
+            transition: opacity .6s;
+            --transform: translateY(0);
+            --transition: transform .8s .8s;
+        }
+
+        .modal__container {
+            margin: auto;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90%;
+            background-color: #fff;
+            border-radius: 6px;
+            padding: 3em 2.5em;
+            display: grid;
+            gap: 1em;
+            place-items: center;
+            grid-auto-columns: 100%;
+            transform: var(--transform);
+            transition: var(--transition);
+        }
+
+        .modal__title {
+            font-size: 2.5rem;
+        }
+
+        .modal__paragraph {
+            margin-bottom: 10px;
+        }
+
+        .modal__img {
+            width: 90%;
+            max-width: 300px;
+        }
+
+        .modal__close {
+            text-decoration: none;
+            color: #fff;
+            background-color: #F26250;
+            padding: 1em 3em;
+            border: 1px solid;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: 300;
+            transition: background-color .3s;
+        }
+
+        .modal__close:hover {
+            color: #F26250;
+            background-color: #fff;
+        }
+
+
+        @media (max-width:800px) {
+            .nav__list {
+                display: none;
+            }
+
+            .nav__menu {
+                display: block;
+            }
+
+            .hero__main {
+                grid-template-columns: 1fr;
+                grid-template-rows: max-content max-content;
+                text-align: center;
+            }
+
+            .hero__picture {
+                grid-row: 1/2;
+            }
+
+            .hero__img {
+                max-width: 500px;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .modal__container {
+                padding: 2em 1.5em;
+            }
+
+            .modal__title {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand text-white" href="index.html">
-                <img src="img/Logo.png" alt="Logo">
-            </a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mx-auto" style="font-size: 1.5rem;">
-                    <li class="nav-item"><a class="nav-link text-white" href="index.html">Início</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="cadastro.php">Cadastro</a></li>
-                    <li class="nav-item"><a class="nav-link disabled text-white-50" href="#">Comprar</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-<div id="carouselExample" class="carousel slide">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="" class="d-block w-100" alt="...">
+
+    <div class="todo">
+        <nav class="nav container">
+            <a href="index.html" style="border: 0;"><img src="img/Logo.png" class="nav__logo" alt=""></a>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
+                <li class="nav__item"><a href="cadastro.php" class="nav__link">Cadastrar</a></li>
+                <li class="nav__item"><a href="ver.php" class="nav__link">Livros</a></li>
+            </ul>
+            <figure class="nav__menu">
+                <img src="img/menu.svg" class="nav__icon">
+            </figure>
+        </nav>
     </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+
+    <div id="ccard"></div>
+
     <a href="cadastro.html" class="link-cadastro">Cadastrar Novo Livro</a>
-    <h1 class="titulo-pagina">Acervo de Livros</h1>
+    <h1 class="titulo-pagina">Acervo de Livros (cadastrado)</h1>
+
+    <hr style="margin: auto; margin-bottom: 30px; text-align: center; height: 2px; width: 60%; color: black;">
+
 
     <?php if ($resultado->num_rows > 0): ?>
         <div class="grid-livros">
@@ -207,9 +418,10 @@ $resultado = $conexao->query($sql);
                     <h3><?= htmlspecialchars($livro['TITULO']) ?></h3>
                     <p><strong>Autor:</strong> <?= htmlspecialchars($livro['AUTOR']) ?></p>
                     <p><strong>Editora:</strong> <?= htmlspecialchars($livro['EDITORA']) ?></p>
-                    <p><strong>Ano:</strong> <?= $livro['ANO_PUBLICACAO'] ?></p>
+                    <p><strong></strong> <?= $livro['ANO_PUBLICACAO'] ?></p>
                     <p><strong>Estado:</strong> <?= $livro['ESTADO'] ?></p>
-                    <p class="preco">R$ <?= number_format($livro['VALOR_COMPRA'], 2, ',', '.') ?></p>
+                    <p class="preco" style="            font-size: 1.3em;
+">R$         <?= number_format($livro['VALOR_COMPRA'], 2, ',', '.') ?></p>
                     <div class="botoes">
                         <form method="get" action="">
                             <input type="hidden" name="excluir" value="<?= $livro['ID'] ?>">
@@ -223,12 +435,41 @@ $resultado = $conexao->query($sql);
                     </div>
                 </div>
             <?php endwhile; ?>
+
         </div>
+
+        <a href="#" class="hero__cta">Join us!</a>
+
+
+        <section class="modal ">
+            <div class="modal__container">
+                <a href="#" class="modal__close">Cerrar Modal</a>
+            </div>
+        </section>
+
     <?php else: ?>
         <p style="text-align: center; color: white;">Nenhum livro cadastrado no acervo.</p>
     <?php endif; ?>
 
+
+
     <?php $conexao->close(); ?>
+
+    <script>
+        const openModal = document.querySelector('.hero__cta');
+        const modal = document.querySelector('.modal');
+        const closeModal = document.querySelector('.modal__close');
+
+        openModal.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('modal--show');
+        });
+
+        closeModal.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.remove('modal--show');
+        });
+    </script>
 </body>
 
 </html>
