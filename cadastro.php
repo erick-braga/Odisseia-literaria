@@ -223,8 +223,6 @@
                         <option value="Surrealismo">Surrealismo</option>
                     </select><br>
 
-
-
                     <label for="formato">Formato:</label><br>
                     <select id="formato" name="FORMATO" required>
                         <option value="" disabled selected>Formato</option>
@@ -242,11 +240,11 @@
                     <label for="imagem">Imagem:</label><br>
                     <input type="file" id="imagem" name="IMAGEM" accept="image/*" required><br>
                     <?php
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['IMAGEM'])) {
+			//essa parte LER APENAS A IMAGEM
+			if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['IMAGEM'])) {
                         $imagem = $_FILES['IMAGEM']['name'];
                         $target_dir = "imagens/";
                         $target_file = $target_dir . basename($imagem);
-
 
                         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                         $valid_extensions = array("jpg", "jpeg", "png", "gif");
@@ -272,9 +270,33 @@
                         <option value="USADO">Usado</option>
                     </select><br>
 
+                   
+                    <label for="arquivo">Arquivo PDF:</label><br>
+                    <input type="file" id="arquivo" name="PDF" accept="application/pdf"><br>
+                    <?php
+		   //essa parte ler APENAS O PDF
+		    $nomePDF = null; // valor padrão é null caso não envie
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['PDF']) && $_FILES['PDF']['error'] === UPLOAD_ERR_OK) {
+                        $target_dir_pdf = "arquivos/";
+                        $ext_pdf = strtolower(pathinfo($_FILES['PDF']['name'], PATHINFO_EXTENSION));
+
+                        if ($ext_pdf === "pdf") {
+                            $nomePDF = uniqid() . '.' . $ext_pdf;
+                            $target_file_pdf = $target_dir_pdf . $nomePDF;
+
+                            if (move_uploaded_file($_FILES['PDF']['tmp_name'], $target_file_pdf)) {
+                                echo "<p>Arquivo PDF enviado com sucesso: $nomePDF</p>";
+                            } else {
+                                echo "Houve um erro ao carregar o PDF.";
+                                $nomePDF = null; // mantém null em caso de erro
+                            }
+                        } else {
+                            echo "Somente arquivos PDF são permitidos.";
+                        }
+                    }
+                    ?>
 
                     <input type="submit" value="Cadastrar Livro" id="submit">
-                </form>
                 </form>
             </div>
         </div>
@@ -282,3 +304,4 @@
 </body>
 
 </html>
+

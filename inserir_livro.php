@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html>
 <html lang="pt-br">
 
 <head>
@@ -46,12 +46,48 @@ $autor = $_POST['AUTOR'] ?? '';
 $idioma = $_POST['IDIOMA'] ?? '';
 $genero = $_POST['GENERO'] ?? '';
 $formato = $_POST['FORMATO'] ?? '';
-$valor_compra = $_POST['VALOR_COMPRA'] ?? 0;
+$valor_compra = $_POST['VALOR_COMPRA'] ?? 0;//valor padrão é '0'
 $ano_publicacao = $_POST['ANO_PUBLICACAO'] ?? '';
 $estado = $_POST['ESTADO'] ?? '';
 
+$diretorioarq = "arquivos/";
+$nomefinal = ''; // inicializa vazio, pois é obrigatório enviar PDF
+
+if (isset($_FILES['PDF']) && $_FILES['PDF']['error'] === UPLOAD_ERR_OK) {
+    $permitidosarq = ['application/pdf']; // apenas PDF
+
+    if (!in_array($_FILES['PDF']['type'], $permitidosarq)) {
+        die("Tipo de arquivo não permitido. Apenas PDFs são aceitos.");
+    }
+
+    $extensaoarq = pathinfo($_FILES['PDF']['name'], PATHINFO_EXTENSION);
+    $nomefinalarq = uniqid() . '.' . $extensaoarq; // gera nome único
+    $caminhofinal = $diretorioarq. $nomefinalarq;
+
+    if (!move_uploaded_file($_FILES['PDF']['tmp_name'], $caminhofinal)) {
+        die("Erro ao mover o arquivo PDF para o diretório de destino.");
+    }
+
+} elseif (isset($_FILES['PDF'])) {
+    // tratar outros erros de upload
+    $erro = $_FILES['PDF']['error'];
+    $mensagenserro = [
+        UPLOAD_ERR_INI_SIZE => 'O arquivo excede o tamanho máximo permitido.',
+        UPLOAD_ERR_FORM_SIZE => 'O arquivo excede o tamanho máximo permitido pelo formulário.',
+        UPLOAD_ERR_PARTIAL => 'O upload do arquivo foi feito parcialmente.',
+        UPLOAD_ERR_NO_FILE => 'Nenhum arquivo foi enviado.',
+        UPLOAD_ERR_NO_TMP_DIR => 'Pasta temporária ausente.',
+        UPLOAD_ERR_CANT_WRITE => 'Falha ao escrever o arquivo no disco.',
+        UPLOAD_ERR_EXTENSION => 'Uma extensão do PHP interrompeu o upload.'
+    ];
+
+    $mensagem = $mensagensErro[$erro] ?? 'Erro desconhecido.';
+    die($mensagem);
+}
+
 $diretorio = "images/";
 $nomeFinal = 'sem-imagem.jpg'; //se não incluir imagem não da erro, pois, acaba adicionando esta
+$caminhoFinal = $diretorio . $nomeFinal;//inicializado com valor padrão
 if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
     $permitidos = ['image/jpeg', 'image/png', 'image/gif'];//tipos de imagem permitidos
     if (!in_array($_FILES['IMAGEM']['type'], $permitidos)) {
@@ -80,12 +116,12 @@ if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
     die("Erro no envio da imagem: " . ($mensagensErro[$erro] ?? "Erro desconhecido (Código: $erro)"));
 }
 
-$sql = "INSERT INTO LIVRARIA (TITULO, EDITORA, AUTOR, IMAGEM, IDIOMA, GENERO, FORMATO, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO LIVRARIA (TITULO, EDITORA, AUTOR, IMAGEM, IDIOMA, GENERO, FORMATO, VALOR_COMPRA, ANO_PUBLICACAO, ESTADO, ARQUIVO)
+        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conexao->prepare($sql); //variavel de conecção bem sucedida
 $stmt->bind_param( //garante tipagem correta dos dados
-    "sssssssdss",//define os parametros do bind_paran, no caso string e double
+    "sssssssdsss",//define os parametros do bind_paran, no caso string e double
     $titulo,
     $editora,
     $autor,
@@ -95,7 +131,8 @@ $stmt->bind_param( //garante tipagem correta dos dados
     $formato,
     $valor_compra,
     $ano_publicacao,
-    $estado
+    $estado,
+    $nomefinal
 );
 if ($stmt->execute()) {
     echo "    <div id='sucesso'>
