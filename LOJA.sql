@@ -39,7 +39,7 @@ CREATE TABLE `LIVRARIA` (
   'Policial','Psicológico','Erótico','Didático','Religioso','Espiritualista','Autoajuda','Humor','Satírico','Lírico',
   'Épico','Narrativo','Dramático','Gótico','Distopia','Utopia','Realismo Mágico','Regionalista','Naturalismo','Romantismo',
   'Modernismo','Pós-modernismo','Realismo','Simbolismo','Expressionismo','Existencialismo','Surrealismo') NOT NULL,
-  `IMAGEM` longblob NOT NULL,
+  `IMAGEM` varchar(125) NOT NULL,
   `FORMATO` enum('FISICO','DIGITAL') NOT NULL,
   `VALOR_COMPRA` decimal(10,2) NOT NULL,
   `ANO_PUBLICACAO` year(4) NOT NULL,
