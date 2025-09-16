@@ -139,6 +139,8 @@
                 <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
                 <li class="nav__item"><a href="cadastro.php" class="nav__link">Cadastrar</a></li>
                 <li class="nav__item"><a href="ver.php" class="nav__link">Livros</a></li>
+                <li class="nav__item"><a href="cliente.php" class="nav__link">Entrar</a></li>
+
             </ul>
             <figure class="nav__menu">
                 <img src="img/menu.svg" class="nav__icon">

@@ -4,82 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos/style002.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
-    <title>Cadastro de Cliente</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <title> Odisséia Literária | Página Inicial </title>
+    <link rel="stylesheet" href="estilos/style.css" media="all">
+    <link rel="stylesheet" href="estilos/mobile.css" media="screen and (max-width: 600px)">
+    <link rel="stylesheet" href="estilos/laptop.css" media="screen and (max-width: 1500px)">
+    <link rel="stylesheet" href="estilos/laptop-1.css" media="screen and (max-width: 950px)">
+    <link rel="stylesheet" href="estilos/tablet.css" media="screen and (max-width: 699px)">
+    <link rel="stylesheet" href="estilos/style002.css">
+    <link rel="stylesheet" href="estilos/mobile2.css" media="screen and (max-width: 500px)">
+
+
 
     <style>
-        @charset "UTF-8";
-
-        @import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
-
-        :root {
-            --font: "Caudex", serif;
-            --font-family: "Cormorant Garamond", serif;
-
-
-            --roxo-profundo: #1d0031;
-            --lavanda-suave: #C8A2C8;
-            --berinjela-neutro: #5D496B;
-            --lilas-claro: #E8DAEF;
-        }
-
-
-        body {
-            background-image: linear-gradient(to top, var(--roxo-profundo)60%, #440072);
-            font-family: var(--font);
-            height: 100vh;
-        }
-
-        header {
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: space-around;
-            gap: 10px;
-        }
-
-        nav {
-            padding: 0px 10px;
-            flex-flow: row wrap;
-            display: flex;
-            gap: 10px;
-        }
-
-        .container {
-            justify-content: center;
-            width: 70vw;
-        }
-
-        nav>a {
-            display: inline-block;
-            flex: 0 1 68px;
-            border: 1px solid;
-            border-radius: 30px;
-
-        }
-
-        .hero {
-            background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
-            color: #fff;
-            display: grid;
-            grid-template-rows: max-content 1fr;
-            grid-template-areas:
-                "nav"
-                "content";
-            min-height: 100vh;
-        }
-
         .nav {
             grid-area: nav;
+
             display: grid;
             justify-content: space-between;
             grid-auto-flow: column;
             gap: 1em;
             align-items: center;
             height: 90px;
+
         }
 
         .nav__list {
@@ -145,13 +96,8 @@
             }
         }
 
-        #image {
-            border: 10px solid white;
+        /* ------ */
 
-        }
-
-
-        /* ---------- */
 
         button {
             background-color: var(--roxo-profundo);
@@ -162,17 +108,15 @@
             font-weight: bolder;
             border-radius: 20px;
         }
+
+        .icontainer {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body>
-
-</body>
-
-</html>
-
-<body>
-
     <div id="nav-her">
         <nav class="nav container">
             <a href="index.html" style="border: 0;"><img src="img/Logo.png" class="nav__logo" alt=""></a>
@@ -180,6 +124,8 @@
                 <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
                 <li class="nav__item"><a href="cadastro.php" class="nav__link">Cadastrar</a></li>
                 <li class="nav__item"><a href="ver.php" class="nav__link">Livros</a></li>
+                <li class="nav__item"><a href="cliente.php" class="nav__link">Entrar</a></li>
+
             </ul>
             <figure class="nav__menu">
                 <img src="img/menu.svg" class="nav__icon">
@@ -187,10 +133,9 @@
         </nav>
     </div>
 
-
     <div class="icontainer">
         <div id="form">
-
+            <h2>Cadastre sua conta</h2>
             <form action="inserir_dados_clientes.php" method="post">
                 <input type="text" name="nome" placeholder="Nome" required><br>
                 <input type="text" name="sobrenome" placeholder="Sobrenome" required><br>
@@ -261,10 +206,81 @@
                 <input type="text" name="estado" placeholder="Estado" required><br>
                 <input type="text" name="cep" placeholder="CEP" required><br><br>
 
-                <button type="submit">Enviar</button>
+                <button type="submit">Proceder</button>
             </form>
         </div>
     </div>
 </body>
 
 </html>
+
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include("conecxao.php");
+
+if (!$conexao) {
+    die("Erro: Conexão com o banco de dados falhou.");
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $nome = $_POST['nome'] ?? '';
+    $sobrenome = $_POST['sobrenome'] ?? '';
+    $cpf = $_POST['cpf'] ?? '';
+    $senha = $_POST['senha'] ?? '';
+    $genero = $_POST['genero'] ?? '';
+    $nascimento = $_POST['nascimento'] ?? '';
+    $telefone = $_POST['telefone'] ?? '';
+    $logradouro = $_POST['logadouro'] ?? '';
+    $numero = $_POST['numero'] ?? '';
+    $complemento = $_POST['complemento'] ?? '';
+    $bairro = $_POST['bairro'] ?? '';
+    $cidade = $_POST['cidade'] ?? '';
+    $estado = $_POST['estado'] ?? '';
+    $cep = $_POST['cep'] ?? '';
+
+    $senhaHash = password_hash($senha, PASSWORD_BCRYPT);//cria hash da senha
+
+    $sqlClientes = "INSERT INTO clientes (cpf, senha) VALUES (?, ?)";
+    $stmt1 = $conexao->prepare($sqlClientes);
+    if (!$stmt1) {
+        die("Erro na preparação da query clientes: " . $conn->error);
+    }
+    $stmt1->bind_param("ss", $cpf, $senhaHash);
+    $stmt1->execute();
+    $stmt1->close();
+
+    $sqlDados = "INSERT INTO dados 
+        (cpf, nome, sobrenome, genero, nascimento, fone, longadouro, numero, complemento, bairro, cidade, estado, cep)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt2 = $conexao->prepare($sqlDados);
+    if (!$stmt2) {
+        die("Erro na preparação da query dados: " . $conexao->error);
+    }
+    $stmt2->bind_param(
+        "sssssssssssss",
+        $cpf,
+        $nome,
+        $sobrenome,
+        $genero,
+        $nascimento,
+        $telefone,
+        $logradouro,
+        $numero,
+        $complemento,
+        $bairro,
+        $cidade,
+        $estado,
+        $cep
+    );
+    $stmt2->execute();
+    $stmt2->close();
+
+    echo "<p>Cadastro realizado com sucesso!</p>";
+
+    $conexao->close();
+}
+?>
