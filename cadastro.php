@@ -126,6 +126,7 @@
             border: 10px solid white;
 
         }
+        
     </style>
 
 </head>
@@ -139,6 +140,8 @@
                 <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
                 <li class="nav__item"><a href="cadastro.php" class="nav__link">Cadastrar</a></li>
                 <li class="nav__item"><a href="ver.php" class="nav__link">Livros</a></li>
+                                <li class="nav__item"><a href="logim.php" class="nav__link">Entrar</a></li>
+
             </ul>
             <figure class="nav__menu">
                 <img src="img/menu.svg" class="nav__icon">
@@ -148,11 +151,7 @@
 
     <main>
         <div class="container">
-            <div id="image">
-                <div id="input-file">
-
-                </div>
-            </div>
+        
             <div id="form">
                 <h1>Cadastrar livro</h1>
                 <form action="inserir_livro.php" method="POST" enctype="multipart/form-data">

@@ -3,7 +3,7 @@ session_start();
 
 // Se não estiver logado, manda de volta para o login
 if (!isset($_SESSION['cpf'])) {
-    header("Location: login.php");
+    header("Location: logim.php");
     exit;
 }
 

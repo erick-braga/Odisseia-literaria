@@ -1,3 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucesso! | Odisséia Literária</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <style>
+        body {
+            background-color: #2f024dff;
+        }
+
+        #center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 99vh;
+
+        }
+
+        #p {
+            padding: 60px;
+            color: black;
+            background-color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        a {
+            color: #2f024df;
+
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -45,16 +89,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Erro na preparação da query dados: " . $conexao->error);
     }
     $stmt2->bind_param(
-        "sssssssssssss", 
-        $cpf, $nome, $sobrenome, $genero, $nascimento, $telefone, 
-        $logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep
+        "sssssssssssss",
+        $cpf,
+        $nome,
+        $sobrenome,
+        $genero,
+        $nascimento,
+        $telefone,
+        $logradouro,
+        $numero,
+        $complemento,
+        $bairro,
+        $cidade,
+        $estado,
+        $cep
     );
     $stmt2->execute();
     $stmt2->close();
 
-    echo "<p>Cadastro realizado com sucesso!</p>";
+    echo "<div id='center'>
+    <div id='p'>Cadastro realizado com sucesso!  <br><br>  <a href='logim.php'>Fazer login na conta</a>.
+</div>
+    </div>
+    ";
 
     $conexao->close();
 }
 ?>
-
