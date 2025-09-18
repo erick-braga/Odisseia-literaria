@@ -31,6 +31,7 @@
             background-image: linear-gradient(to top, var(--roxo-profundo)60%, #440072);
             font-family: var(--font);
             height: 100vh;
+            width: 100vw;
         }
 
         header {
@@ -41,45 +42,16 @@
             gap: 10px;
         }
 
-        nav {
-            padding: 0px 10px;
-            flex-flow: row wrap;
-            display: flex;
-            gap: 10px;
-        }
-
-        .container {
-            justify-content: center;
-            width: 70vw;
-        }
-
-        nav>a {
-            display: inline-block;
-            flex: 0 1 68px;
-            border: 1px solid;
-            border-radius: 30px;
-
-        }
-
-        .hero {
-            background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
-            color: #fff;
-            display: grid;
-            grid-template-rows: max-content 1fr;
-            grid-template-areas:
-                "nav"
-                "content";
-            min-height: 100vh;
-        }
-
         .nav {
             grid-area: nav;
+
             display: grid;
             justify-content: space-between;
             grid-auto-flow: column;
             gap: 1em;
             align-items: center;
             height: 90px;
+
         }
 
         .nav__list {
@@ -144,13 +116,6 @@
                 font-size: 2rem;
             }
         }
-
-        #image {
-            border: 10px solid white;
-
-        }
-
-
         /* ---------- */
 
         button {
@@ -162,6 +127,11 @@
             font-weight: bolder;
             border-radius: 20px;
         }
+
+        .icontainer {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -172,7 +142,6 @@
 </html>
 
 <body>
-
     <div id="nav-her">
         <nav class="nav container">
             <a href="index.html" style="border: 0;"><img src="img/Logo.png" class="nav__logo" alt=""></a>
@@ -190,7 +159,7 @@
 
     <div class="icontainer">
         <div id="form">
-
+            <h2>Cadastre sua conta</h2>
             <form action="inserir_dados_clientes.php" method="post">
                 <input type="text" name="nome" placeholder="Nome" required><br>
                 <input type="text" name="sobrenome" placeholder="Sobrenome" required><br>

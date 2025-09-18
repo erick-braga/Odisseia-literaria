@@ -407,7 +407,10 @@ $resultado = $conexao->query($sql);
                 <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
                 <li class="nav__item"><a href="cadastro.php" class="nav__link">Cadastrar</a></li>
                 <li class="nav__item"><a href="ver.php" class="nav__link">Livros</a></li>
-                <li class="nav__item"><a href="logim.php" class="nav__link">Entrar</a></li>
+                <<<<<<< HEAD <li class="nav__item"><a href="logim.php" class="nav__link">Entrar</a></li>
+                    =======
+                    <li class="nav__item"><a href="cliente.php" class="nav__link">Entrar</a></li>
+                    >>>>>>> 5201585c7f63e8b24fc1f838a4a943a2a034cffa
 
             </ul>
             <figure class="nav__menu">
