@@ -1,9 +1,0 @@
-@charset "UTF-8";
-
-header {
-    flex-flow: column nowrap;
-}
-nav {
-    width: 100%;
-    flex-flow: column nowrap;
-}
