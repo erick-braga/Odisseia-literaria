@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+main img {
+    width: 300px;
+}
+main h1 {
+    font-size: 1.9em;
+}
+main p {
+    font-size: 1.1em;
+}
+#img {
+    margin-right: 10px;
+}

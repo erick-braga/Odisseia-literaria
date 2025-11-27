@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+main {
+    flex-flow: column-reverse nowrap;
+}
+main img {
+    width: 600px;
+}
+main {
+    text-align: center;
+    
+}
+main p {
+    width: 100%;
+}
